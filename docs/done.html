@@ -13,6 +13,7 @@
 
         gtag('config', 'G-BYPGTX1QBM');
     </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -33,7 +34,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary py-3">
             <div class="container">
-                <a class="navbar-brand" href="Home.html" style = "font-size: 28px;">
+                <a class="navbar-brand" href="Home.html" style="font-size: 28px;">
                     <i class="bi bi-graph-up" role="img" aria-label="Logo" style="padding-right: 5px; "></i>
                     Inflation Projector
                 </a>
@@ -44,32 +45,60 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="nav navbar-nav ms-auto" >
+                    <ul class="nav navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="Home.html" style = "font-size: 22px;">Home</a>
+                            <a class="nav-link" href="Home.html" style="font-size: 22px;">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="About.html" style = "font-size: 22px;">What is inflation?</a>
+                            <a class="nav-link" href="About.html" style="font-size: 22px;">What is inflation?</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Current Trends.html" style = "font-size: 22px;">Current Trends</a>
+                            <a class="nav-link" href="Current Trends.html" style="font-size: 22px;">Current Trends</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="Projection.html" style = "font-size: 22px;">Projection</a>
+                            <a class="nav-link active" href="Projection.html" style="font-size: 22px;">Projection</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="container body-content">
+        <div class="row" style="margin-top: 5%;  margin-bottom: 3%;">
+            <h2 style="text-align: center; margin-bottom: 2%;">Your Projection!</h2>
+            <div id="myPlot" style="width:100%; max-width:700px; padding-left: 25%;"></div>
+            <p id="demo"></p>
+            <script>
+                //let z = getElementById("foodExpediture");
+                var xArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                var yArray = [0, 400, 200, 200, 200, 200, 200, 200, 200];
 
-    <div class="container" style="margin-top: 2%">
-        <h1 style="margin-bottom: 30px; padding-left: 40%;">Message Received!</h1>
-        <p style="padding-left: 30%">Thank you for submitting your message. We will get back in touch soon!</p>
-        <img src="images/Message Sent.png" alt="Message Sent" width="30%" height="30%" class="rounded img-fluid"
-            style="margin-left: 35%;">
+                // Define Data
+                var data = [{
+                    x: xArray,
+                    y: yArray,
+                    mode: "lines"
+                }];
+
+                // Define Layout
+                var layout = {
+                    xaxis: { range: [0, 12], title: "Time (months)" },
+                    yaxis: { range: [0, 1000], title: "Total Spending" },
+                    title: "Spending vs. Time"
+                };
+
+                // Display using Plotly
+                Plotly.newPlot("myPlot", data, layout);
+            </script>
+        </div>
+
+        <hr>
+        <footer>
+            <p>© 2022 - Hardly Working Ignition Hacks</p>
+        </footer>
     </div>
 
+    <script type="text/javascript" src="script.js"></script>
 
 </body>
 

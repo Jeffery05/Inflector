@@ -70,7 +70,7 @@
         </div>
         
 
-        <form class="needs-validation" style = "margin-bottom: 5%;">
+        <form class="needs-validation" style = "margin-bottom: 5%;" id = "frm1" method = "get" action="done.html">
             <div class="row g-3" style ="text-align: center;">
                 <div class="col-sm-3">
                     <label for="foodExpediture" class="form-label">Food Expediture</label>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-sm-3">
                     <label for="shelterExpediture" class="form-label">Clothing and Footwear Expediture</label>
-                    <input name="Shelter Expediture" type="number" class="form-control" id="shelterExpediture" placeholder="Shelter Expediture"
+                    <input name="Shelter Expediture" type="number" class="form-control" id="clothingExpediture" placeholder="Shelter Expediture"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid number is required.
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-sm-3">
                     <label for="foodExpediture" class="form-label">Transportation Expediture</label>
-                    <input name="Food Expediture" type="number" class="form-control" id="foodExpediture" placeholder="Food Expediture"
+                    <input name="Food Expediture" type="number" class="form-control" id="transportationExpediture" placeholder="Food Expediture"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid number is required.
@@ -108,7 +108,7 @@
             <div class="row g-3" style ="text-align: center; margin-top: 2%;">
                 <div class="col-sm-3" style = "margin-top: 3%">
                     <label for="shelterExpediture" class="form-label">Health and Personal Care Expediture</label>
-                    <input name="Shelter Expediture" type="number" class="form-control" id="shelterExpediture" placeholder="Shelter Expediture"
+                    <input name="Shelter Expediture" type="number" class="form-control" id="healthExpediture" placeholder="Shelter Expediture"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid number is required.
@@ -116,7 +116,7 @@
                 </div>
                 <div class="col-sm-3">
                     <label for="shelterExpediture" class="form-label">Household Operations, Furnishings and Equipment Expediture</label>
-                    <input name="Shelter Expediture" type="number" class="form-control" id="shelterExpediture" placeholder="Shelter Expediture"
+                    <input name="Shelter Expediture" type="number" class="form-control" id="householdExpediture" placeholder="Shelter Expediture"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid number is required.
@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-sm-3">
                     <label for="shelterExpediture" class="form-label">Recreation, Education and Reading Expediture</label>
-                    <input name="Shelter Expediture" type="number" class="form-control" id="shelterExpediture" placeholder="Shelter Expediture"
+                    <input name="Shelter Expediture" type="number" class="form-control" id="recreationExpediture" placeholder="Shelter Expediture"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid number is required.
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-sm-3">
                     <label for="shelterExpediture" class="form-label">Alcoholic Beverages, Tobacco Products and Recreational Cannabis Expediture</label>
-                    <input name="Shelter Expediture" type="number" class="form-control" id="shelterExpediture" placeholder="Shelter Expediture"
+                    <input name="Shelter Expediture" type="number" class="form-control" id="alcoholExpediture" placeholder="Shelter Expediture"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid number is required.
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-5" id="sendMessage" style = "margin-left: 47%; margin-top: 10%">Submit</button>
-            <input type="hidden" name="_next" value="https://decamackenzie.ca/done.html">
+            <input type="hidden" name="_next" value="done.html">
         </form>
         <hr>
         <footer>
@@ -162,6 +162,7 @@
             toastList.forEach(toast => toast.show()); // this show them
         };
     </script>
+    <script type="text/javascript" src="script.js"></script>
 
 </body>
 
