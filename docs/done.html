@@ -29,6 +29,8 @@
 
     <script src="jquery-3.4.1.js" type="text/javascript"></script>
     <script src="bootstrap.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
 
 
     <header>
@@ -66,30 +68,54 @@
     <div class="container body-content">
         <div class="row" style="margin-top: 5%;  margin-bottom: 3%;">
             <h2 style="text-align: center; margin-bottom: 2%;">Your Projection!</h2>
-            <div id="myPlot" style="width:100%; max-width:700px; padding-left: 25%;"></div>
-            <p id="demo"></p>
-            <script>
-                //let z = getElementById("foodExpediture");
-                var xArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-                var yArray = [0, 400, 200, 200, 200, 200, 200, 200, 200];
+            <div class="col-sm-3">
 
-                // Define Data
-                var data = [{
-                    x: xArray,
-                    y: yArray,
-                    mode: "lines"
-                }];
+            </div>
+            <div class="col-sm-6">
+                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                <!DOCTYPE html>
+                <html>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-                // Define Layout
-                var layout = {
-                    xaxis: { range: [0, 12], title: "Time (months)" },
-                    yaxis: { range: [0, 1000], title: "Total Spending" },
-                    title: "Spending vs. Time"
-                };
+                <body>
+                    <canvas id="myChart" style="width:100%; max-width:600px; margin-left: 100px"></canvas>
+                    <script>
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const foodExpediture = urlParams.get('foodExpediture');
+                        const shelterExpediture = urlParams.get('shelterExpediture');
+                        const clothingExpediture = urlParams.get('clothingExpediture');
+                        const transportationExpediture = urlParams.get('transportationExpediture');
+                        const healthExpediture = urlParams.get('healthExpediture');
+                        const householdExpediture = urlParams.get('householdExpediture');
+                        const recreationExpediture = urlParams.get('recreationExpediture');
+                        const alcoholExpediture = urlParams.get('alcoholExpediture');
+                        const totalExpediture = parseInt(foodExpediture) + parseInt(shelterExpediture) + parseInt(clothingExpediture) + parseInt(transportationExpediture) + parseInt(healthExpediture) + parseInt(householdExpediture) + parseInt(recreationExpediture) + parseInt(alcoholExpediture);
+                        var xValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-                // Display using Plotly
-                Plotly.newPlot("myPlot", data, layout);
-            </script>
+                        new Chart("myChart", {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    data: [totalExpediture, totalExpediture * 1.08, totalExpediture * Math.pow(1.08, 2), totalExpediture * Math.pow(1.08, 3), totalExpediture * Math.pow(1.08, 4), totalExpediture * Math.pow(1.08, 5), totalExpediture * Math.pow(1.08, 6), totalExpediture * Math.pow(1.08, 7), totalExpediture * Math.pow(1.08, 8), totalExpediture * Math.pow(1.08, 9), totalExpediture * Math.pow(1.08, 10), totalExpediture * Math.pow(1.08, 11), totalExpediture * Math.pow(1.08, 12)],
+                                    borderColor: "red",
+                                    fill: false
+                                }, {
+                                    data: [totalExpediture, totalExpediture * 1.06, totalExpediture * Math.pow(1.06, 2), totalExpediture * Math.pow(1.06, 3), totalExpediture * Math.pow(1.06, 4), totalExpediture * Math.pow(1.06, 5), totalExpediture * Math.pow(1.06, 6), totalExpediture * Math.pow(1.06, 7), totalExpediture * Math.pow(1.06, 8), totalExpediture * Math.pow(1.06, 9), totalExpediture * Math.pow(1.06, 10), totalExpediture * Math.pow(1.06, 11), totalExpediture * Math.pow(1.06, 12)],
+                                    borderColor: "green",
+                                    fill: false
+                                }, {
+                                    data: [totalExpediture, totalExpediture * 1.10, totalExpediture * Math.pow(1.10, 2), totalExpediture * Math.pow(1.10, 3), totalExpediture * Math.pow(1.10, 4), totalExpediture * Math.pow(1.10, 5), totalExpediture * Math.pow(1.10, 6), totalExpediture * Math.pow(1.10, 7), totalExpediture * Math.pow(1.10, 8), totalExpediture * Math.pow(1.10, 9), totalExpediture * Math.pow(1.10, 10), totalExpediture * Math.pow(1.10, 11), totalExpediture * Math.pow(1.10, 12)],
+                                    borderColor: "blue",
+                                    fill: false
+                                }]
+                            },
+                            options: {
+                                legend: { display: false }
+                            }
+                        });
+                    </script>
+            </div>
         </div>
 
         <hr>
