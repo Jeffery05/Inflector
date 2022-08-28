@@ -143,3 +143,43 @@ p {font-size: 20px; }
     background-color:white;
 }
 
+.aboutImg1 {
+    width: 700px;
+}
+
+.about1 {
+    font-style: italic;
+    font-size: 20px;
+}
+
+.about2 {
+    margin-left: 250px;
+    margin-top: 60px;
+    width: 50%;
+}
+
+.aboutImg2 {
+    margin-top: 50px;
+    margin-right: 150px;
+    width: 400px;
+}
+
+.headerWhy {
+    margin-top: 50px;
+    margin-left: 250px;
+}
+
+.about3 {
+    margin-top: 5px;
+    margin-left: 250px;
+}
+
+.aboutImg3_4 {
+    width: 400px;
+    margin-left: 250px;
+}
+
+.about4 {
+    margin-left: 0px;
+    width: 400px;
+}
