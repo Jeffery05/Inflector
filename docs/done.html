@@ -66,8 +66,10 @@
         </nav>
     </header>
     <div class="container body-content">
+
         <div class="row" style="margin-top: 5%;  margin-bottom: 3%;">
-            <h2 style="text-align: center; margin-bottom: 2%;">Your Projection!</h2>
+
+            <h2 style="text-align: center; margin-bottom: 2%;">Your Projection:</h2>
             <div class="col-sm-3">
 
             </div>
@@ -78,8 +80,9 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
                 <body>
-                    <canvas id="myChart" style="width:100%; max-width:600px; margin-left: 100px"></canvas>
-                    <script>
+                    <canvas id="myChart" style="width:100%; max-width:600px; margin-left: 100px; height: 50%;"></canvas>
+                    <script type="text/javascript">
+                        console.log(monthlyRate);
                         const urlParams = new URLSearchParams(window.location.search);
                         const foodExpediture = urlParams.get('foodExpediture');
                         const shelterExpediture = urlParams.get('shelterExpediture');
@@ -91,32 +94,115 @@
                         const alcoholExpediture = urlParams.get('alcoholExpediture');
                         const totalExpediture = parseInt(foodExpediture) + parseInt(shelterExpediture) + parseInt(clothingExpediture) + parseInt(transportationExpediture) + parseInt(healthExpediture) + parseInt(householdExpediture) + parseInt(recreationExpediture) + parseInt(alcoholExpediture);
                         var xValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                        var country = 'Canada'
+                        var monthlyRate = 0.00000;
+                        var yearlyRate = 0.00000;
+
+                        $.ajax({
+                            method: 'GET',
+                            url: 'https://api.api-ninjas.com/v1/inflation?country=' + country,
+                            headers: { 'X-Api-Key': 'IpKlmdnDxSgQCSWJbIJHHA==RI3oqxt2t7QpdpsF' },
+                            async: false,
+                            contentType: 'application/json',
+                            success: function (result) {
+                                console.log(result[0]);
+                                monthlyRate = result[0].monthly_rate_pct;
+                                yearlyRate = result[0].yearly_rate_pct;
+                            },
+                            error: function ajaxError(jqXHR) {
+                                console.error('Error: ', jqXHR.responseText);
+                            }
+                        });
+
+
+                        monthlyRate = 1.0 + monthlyRate / 100.0;
+                        var yearlyInflationRate = 1.0 + ((yearlyRate / 12.0) / 100.0);
+                        const fedRate = 1.00166666;
+                        console.log(monthlyRate);
 
                         new Chart("myChart", {
                             type: "line",
                             data: {
                                 labels: xValues,
                                 datasets: [{
-                                    data: [totalExpediture, totalExpediture * 1.08, totalExpediture * Math.pow(1.08, 2), totalExpediture * Math.pow(1.08, 3), totalExpediture * Math.pow(1.08, 4), totalExpediture * Math.pow(1.08, 5), totalExpediture * Math.pow(1.08, 6), totalExpediture * Math.pow(1.08, 7), totalExpediture * Math.pow(1.08, 8), totalExpediture * Math.pow(1.08, 9), totalExpediture * Math.pow(1.08, 10), totalExpediture * Math.pow(1.08, 11), totalExpediture * Math.pow(1.08, 12)],
+                                    label: 'Monthly Rate of Inflation',
+                                    data: [totalExpediture, totalExpediture * monthlyRate, totalExpediture * Math.pow(monthlyRate, 2), totalExpediture * Math.pow(monthlyRate, 3), totalExpediture * Math.pow(monthlyRate, 4), totalExpediture * Math.pow(monthlyRate, 5), totalExpediture * Math.pow(monthlyRate, 6), totalExpediture * Math.pow(monthlyRate, 7), totalExpediture * Math.pow(monthlyRate, 8), totalExpediture * Math.pow(monthlyRate, 9), totalExpediture * Math.pow(monthlyRate, 10), totalExpediture * Math.pow(monthlyRate, 11), totalExpediture * Math.pow(monthlyRate, 12)],
                                     borderColor: "red",
                                     fill: false
                                 }, {
-                                    data: [totalExpediture, totalExpediture * 1.06, totalExpediture * Math.pow(1.06, 2), totalExpediture * Math.pow(1.06, 3), totalExpediture * Math.pow(1.06, 4), totalExpediture * Math.pow(1.06, 5), totalExpediture * Math.pow(1.06, 6), totalExpediture * Math.pow(1.06, 7), totalExpediture * Math.pow(1.06, 8), totalExpediture * Math.pow(1.06, 9), totalExpediture * Math.pow(1.06, 10), totalExpediture * Math.pow(1.06, 11), totalExpediture * Math.pow(1.06, 12)],
+                                    label: '2% Rate of Inflation',
+                                    data: [totalExpediture, totalExpediture * fedRate, totalExpediture * Math.pow(fedRate, 2), totalExpediture * Math.pow(fedRate, 3), totalExpediture * Math.pow(fedRate, 4), totalExpediture * Math.pow(fedRate, 5), totalExpediture * Math.pow(fedRate, 6), totalExpediture * Math.pow(fedRate, 7), totalExpediture * Math.pow(fedRate, 8), totalExpediture * Math.pow(fedRate, 9), totalExpediture * Math.pow(fedRate, 10), totalExpediture * Math.pow(fedRate, 11), totalExpediture * Math.pow(fedRate, 12)],
                                     borderColor: "green",
                                     fill: false
                                 }, {
-                                    data: [totalExpediture, totalExpediture * 1.10, totalExpediture * Math.pow(1.10, 2), totalExpediture * Math.pow(1.10, 3), totalExpediture * Math.pow(1.10, 4), totalExpediture * Math.pow(1.10, 5), totalExpediture * Math.pow(1.10, 6), totalExpediture * Math.pow(1.10, 7), totalExpediture * Math.pow(1.10, 8), totalExpediture * Math.pow(1.10, 9), totalExpediture * Math.pow(1.10, 10), totalExpediture * Math.pow(1.10, 11), totalExpediture * Math.pow(1.10, 12)],
+                                    label: 'Annual Rate of Inflation',
+                                    data: [totalExpediture, totalExpediture * yearlyInflationRate, totalExpediture * Math.pow(yearlyInflationRate, 2), totalExpediture * Math.pow(yearlyInflationRate, 3), totalExpediture * Math.pow(yearlyInflationRate, 4), totalExpediture * Math.pow(yearlyInflationRate, 5), totalExpediture * Math.pow(yearlyInflationRate, 6), totalExpediture * Math.pow(yearlyInflationRate, 7), totalExpediture * Math.pow(yearlyInflationRate, 8), totalExpediture * Math.pow(yearlyInflationRate, 9), totalExpediture * Math.pow(yearlyInflationRate, 10), totalExpediture * Math.pow(yearlyInflationRate, 11), totalExpediture * Math.pow(yearlyInflationRate, 12)],
                                     borderColor: "blue",
                                     fill: false
                                 }]
                             },
                             options: {
-                                legend: { display: false }
+                                legend: { display: true },
+                                scales: {
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Monthly Expenditures (in CAD)'
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Time (in Months)'
+                                        }
+                                    }]
+                                }
                             }
+
                         });
+
+                        var yearMonthlyRate = totalExpediture * Math.pow(monthlyRate, 12);
+                        var yearAnnualRate = totalExpediture * Math.pow(yearlyInflationRate, 12);
+                        var yearHealthyRate = totalExpediture * Math.pow(1.00166666, 12);
+                        window.onload = function what() {
+                            document.getElementById('exMonth').innerHTML = "$" + yearMonthlyRate.toFixed(2);
+                            document.getElementById('exYear').innerHTML = "$" + yearAnnualRate.toFixed(2);
+                            document.getElementById('exHealthy').innerHTML = "$" + yearHealthyRate.toFixed(2);
+                            document.getElementById('currentExpenses').innerHTML = "$" + totalExpediture.toFixed(2);
+                        };
                     </script>
             </div>
         </div>
+        <div class="row" style="margin-top: -20%; margin-bottom: 3%; text-align: center;">
+            <h1 style="color: black; margin-right: 5%;" class="finalFigures">
+                <div id="currentExpenses"></div>
+            </h1>
+            <p>Is the amount you money you <b>currently</b> pay per month.</p>
+        </div>
+        <div class="row" style="margin-top: 5%; margin-bottom: 3%; text-align: center;">
+            <h1 style="color: red; margin-right: 5%;" class="finalFigures">
+                <div id="exMonth"></div>
+            </h1>
+            <p>Is the amount you should expect to pay per month in a year if the current <b>monthly</b> rate of
+                inflation keeps up.</p>
+        </div>
+        <div class="row" style="margin-top: 5%; margin-bottom: 3%; text-align: center;">
+            <h1 style="color: blue; margin-right: 5%;" class="finalFigures">
+                <div id="exYear"></div>
+            </h1>
+            <p>Is the amount you should expect to pay per month in a year if the current average <b>annual</b> rate of
+                inflation keeps up.</p>
+        </div>
+        <div class="row" style="margin-top: 5%; margin-bottom: 3%; text-align: center;">
+            <h1 style="color: green; margin-right: 5%;" class="finalFigures">
+                <div id="exHealthy"></div>
+            </h1>
+            <p>Is the amount you should expect to pay per month in a year if the Bank of Canada reaches its mandate of a
+                <b>2%</b> annual rate of
+                inflation.
+            </p>
+        </div>
+
 
         <hr>
         <footer>

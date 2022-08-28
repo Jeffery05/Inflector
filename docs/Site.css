@@ -1,4 +1,5 @@
-﻿/* Move down content because we have a fixed navbar that is 50px tall */
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -24,20 +25,9 @@ textarea {
 
 p {font-size: 20px; }
 
-.jumbotron-welcome{
-    background: url('images/DECA\ Stage.jpg') no-repeat fixed;
-}
-
-.jumbotron-DECAMackenzie{
-    background: url('images/DECA\ Logo.png') no-repeat fixed;
-}
-
-.jumbotron-WhyJoin{
-    background: url('images/Why\ Join.jpg') no-repeat fixed;
-}
-
-.jumbotron-HowToApply{
-    background: url('images/HowToApply.jpg') no-repeat fixed;
+.finalFigures{
+    font-size: 120px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -53,11 +43,6 @@ p {font-size: 20px; }
 .carousel-caption {
     bottom: 1rem;
     z-index: 10;
-}
-
-.welcome-carousel-image1{
-    box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.3);
-    background-image: url('images/2019-2020\ Marketing\ Photo.jpg')
 }
 
 .btn-primary{
@@ -78,4 +63,139 @@ p {font-size: 20px; }
     box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0);
     height: 65vh;
     background-size: cover;
+}
+
+.landing {
+    color: red;
+    font-size: 40px;
+    font-family: times-new-roman;
+    margin-left: 150px;
+    margin-top: 40px;
+}
+
+.main {
+    color: black;
+    font-size: 20px;
+    margin-left: 150px;
+    width: 530px;
+    margin-top: 15px;
+}
+
+.dashboard {
+    width: 30%;
+    margin-left: 800px;
+    margin-top:-270px;
+}
+
+.about {
+    margin-left:-975px;
+    margin-top: 20px;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: white;
+    color: red;
+    border-width: 2px;
+    border-color: red;
+    border-style: solid;
+    padding-left: 32px;
+    padding-top: 10px;
+}
+
+.about:hover {
+    color: white;
+    background-color:red;
+}
+
+.projection-tool {
+    margin-left:50px;
+    margin-top: 20px;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: red;
+    color: white;
+    border-width: 2px;
+    border-color: red;
+    border-style: solid;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.projection-tool:hover {
+    color: red;
+    background-color:white;
+}
+
+.aboutImg1 {
+    width: 700px;
+}
+
+.about1 {
+    font-style: italic;
+    font-size: 20px;
+}
+
+.about2 {
+    margin-left: 250px;
+    margin-top: 60px;
+    width: 50%;
+}
+
+.aboutImg2 {
+    margin-top: 50px;
+    margin-right: 150px;
+    width: 400px;
+}
+
+.headerWhy {
+    margin-top: 50px;
+    margin-left: 250px;
+}
+
+.about3 {
+    margin-top: 5px;
+    margin-left: 250px;
+}
+
+.aboutImg3_4 {
+    width: 400px;
+    margin-left: 250px;
+}
+
+.about4 {
+    margin-left: 0px;
+    width: 400px;
+}
+
+.about5 {
+    margin-left: 250px;
+    margin-top:25px;
+    width: 400px;
+}
+
+.aboutImg5 {
+    width: 300px;
+}
+
+.headerWhy2 {
+    margin-top: 50px;
+}
+
+.about6 {
+    margin-left: 200px;
+    margin-top:25px;
+    width: 950px;
+}
+
+.trend {
+    margin-left: 250px;
+    margin-top: 20px;
+    width: 500px;
+}
+
+.trendImg {
+    margin-top: 0px;
+    margin-right: 100px;
+    width: 430px;
 }
