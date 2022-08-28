@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@ishangarg19 
+Jeffery05
+/
+New-Ignition-Hacks
+Public
+Code
+Issues
+Pull requests
+1
+Actions
+Projects
+Wiki
+Security
+Insights
+New-Ignition-Hacks/docs/Home.html
+@Jeffery05
+Jeffery05 Add files via upload
+Latest commit 4afd0fa 2 minutes ago
+ History
+ 2 contributors
+@ishangarg19@Jeffery05
+147 lines (128 sloc)  6.56 KB
+
 <!DOCTYPE html>
 
 <html lang="en"
@@ -29,12 +59,40 @@
 
     <script src="jquery-3.4.1.js" type="text/javascript"></script>
     <script src="bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var country = 'Canada';
+        var period = "";
+        var monthRate = 0.0;
+        var yearRate = 0.0;
+        $.ajax({
+            method: 'GET',
+            url: 'https://api.api-ninjas.com/v1/inflation?country=' + country,
+            headers: { 'X-Api-Key': 'IpKlmdnDxSgQCSWJbIJHHA==RI3oqxt2t7QpdpsF' },
+            async: false,
+            contentType: 'application/json',
+            success: function (result) {
+                monthRate = result[0].monthly_rate_pct;
+                yearRate = result[0].yearly_rate_pct;
+                period = result[0].period;
+            },
+            error: function ajaxError(jqXHR) {
+                console.error('Error: ', jqXHR.responseText);
+            }
+        });
+            period = period.toUpperCase();
+            window.onload = function what() {
+                document.getElementById('monthRate').innerHTML = monthRate + "%";
+                document.getElementById('yearRate').innerHTML = yearRate + "%";
+                document.getElementById('date').innerHTML = period;
+            };
+        
+    </script>
 
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary py-3">
             <div class="container">
-                <a class="navbar-brand" href="Home.html" style = "font-size: 28px;">
+                <a class="navbar-brand" href="Home.html" style="font-size: 28px;">
                     <i class="bi bi-graph-up" role="img" aria-label="Logo" style="padding-right: 5px; "></i>
                     Inflector
                 </a>
@@ -45,18 +103,18 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="nav navbar-nav ms-auto" >
+                    <ul class="nav navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="Home.html" style = "font-size: 22px;">Home</a>
+                            <a class="nav-link active" href="Home.html" style="font-size: 22px;">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="About.html" style = "font-size: 22px;">What is inflation?</a>
+                            <a class="nav-link" href="About.html" style="font-size: 22px;">What is inflation?</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Current Trends.html" style = "font-size: 22px;">Current Trends</a>
+                            <a class="nav-link" href="Current Trends.html" style="font-size: 22px;">Current Trends</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Projection.html" style = "font-size: 22px;">Projection</a>
+                            <a class="nav-link" href="Projection.html" style="font-size: 22px;">Projection</a>
                         </li>
                     </ul>
                 </div>
@@ -65,16 +123,42 @@
     </header>
 
     <div class="container body-content">
-        <div class="row" style="margin-top: 5%;  margin-bottom: 3%;">
+        <div class="row" style="margin-top: 5%;  margin-bottom: 10%;">
             <h1 style="text-align: center; margin-bottom: 2%;">Welcome to Inflector, the Inflation Projector!</h1>
             <h3 class="landing">Stress-Free Financial Planning, <br> with the aid of Inflation APIs.</h3>
             <p class="main" align="justify"> Calculate the effects of inflation on your life using this simple tool.
-                Using inflation rates updated in real time, find out how much your current spending habits 
+                Using inflation rates updated in real time, find out how much your current spending habits
                 would cost you every month for the next year.</p>
-            <image src="img//inflation.png" class="dashboard"> 
-            <a class="about" href="About.html">Learn more</a>
-            <a type="submit" class="projection-tool" href="Projection.html">Projection Tool</a>
-                
+            <image src="img//inflation.png" class="dashboard">
+                <a class="about" href="About.html">Learn more</a>
+                <a type="submit" class="projection-tool" href="Projection.html">Projection Tool</a>
+
+        </div>
+        <hr>
+        <div class="row" style="margin-top: 5%;  margin-bottom: 5%; text-align: center;">
+            <h1 style=" margin-bottom: 2%;">Inflation Updates:</h1>
+            <div class="col-sm-6">
+                <p>Monthly Rate
+                </p>
+                <h1 style="color: red; margin-right: 5%;" class="finalFigures">
+                    <div id="monthRate"></div>
+                </h1>
+            </div>
+            <div class="col-sm-6">
+                <p>Annual Rate
+                </p>
+                <h1 style="color: blue; margin-right: 5%;" class="finalFigures">
+                    <div id="yearRate"></div>
+                </h1>
+            </div>
+
+            
+                <p>As of:
+                </p>
+                <h1 style="color: green; margin-right: 5%;" class="finalFigures">
+                    <div id="date"></div>
+                </h1>
+
         </div>
 
         <hr>
@@ -91,3 +175,18 @@
 </body>
 
 </html>
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+You have no unread notifications
