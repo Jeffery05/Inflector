@@ -31,7 +31,6 @@
     <script src="bootstrap.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     </script>
-    <script src="script.js"type="text/javascript" ></script>
 
 
     <header>
@@ -80,8 +79,8 @@
 
                 <body>
                     <canvas id="myChart" style="width:100%; max-width:600px; margin-left: 100px"></canvas>
-                    <!-- <p id="hi">this is the inflation rate: </p> -->
-                    <script>
+                    <script type="text/javascript">
+                        console.log (monthlyRate);
                         const urlParams = new URLSearchParams(window.location.search);
                         const foodExpediture = urlParams.get('foodExpediture');
                         const shelterExpediture = urlParams.get('shelterExpediture');
@@ -93,24 +92,45 @@
                         const alcoholExpediture = urlParams.get('alcoholExpediture');
                         const totalExpediture = parseInt(foodExpediture) + parseInt(shelterExpediture) + parseInt(clothingExpediture) + parseInt(transportationExpediture) + parseInt(healthExpediture) + parseInt(householdExpediture) + parseInt(recreationExpediture) + parseInt(alcoholExpediture);
                         var xValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-                        var rate = parseFloat(getRate());
-                        //document.getElementById("hi").innerHTML = rate;
-                        var inflationRate = 1.0 + rate/12.0/100.0;
+                        var country = 'Canada'
+                        var monthlyRate = 0.00000;
+                        var yearlyRate = 0.00000;
+                        $.ajax({
+                            method: 'GET',
+                            url: 'https://api.api-ninjas.com/v1/inflation?country=' + country,
+                            headers: { 'X-Api-Key': 'IpKlmdnDxSgQCSWJbIJHHA==RI3oqxt2t7QpdpsF' },
+                            async: false,
+                            contentType: 'application/json',
+                            success: function (result) {
+                                console.log(result[0]);
+                                monthlyRate = result[0].monthly_rate_pct;
+                                yearlyRate = result[0].yearly_rate_pct;
+                            },
+                            error: function ajaxError(jqXHR) {
+                                console.error('Error: ', jqXHR.responseText);
+                            }
+                        });
+
+                        
+                        monthlyRate = 1.0 + monthlyRate / 100.0;
+                        var yearlyInflationRate = 1.0 + ((yearlyRate/ 12.0)/ 100.0);
+                        const fedRate = 1.001666;
+                        console.log(monthlyRate);
 
                         new Chart("myChart", {
                             type: "line",
                             data: {
                                 labels: xValues,
                                 datasets: [{
-                                    data: [totalExpediture, totalExpediture * inflationRate, totalExpediture * Math.pow(inflationRate, 2), totalExpediture * Math.pow(inflationRate, 3), totalExpediture * Math.pow(inflationRate, 4), totalExpediture * Math.pow(inflationRate, 5), totalExpediture * Math.pow(inflationRate, 6), totalExpediture * Math.pow(inflationRate, 7), totalExpediture * Math.pow(inflationRate, 8), totalExpediture * Math.pow(inflationRate, 9), totalExpediture * Math.pow(inflationRate, 10), totalExpediture * Math.pow(inflationRate, 11), totalExpediture * Math.pow(inflationRate, 12)],
+                                    data: [totalExpediture, totalExpediture * monthlyRate, totalExpediture * Math.pow(monthlyRate, 2), totalExpediture * Math.pow(monthlyRate, 3), totalExpediture * Math.pow(monthlyRate, 4), totalExpediture * Math.pow(monthlyRate, 5), totalExpediture * Math.pow(monthlyRate, 6), totalExpediture * Math.pow(monthlyRate, 7), totalExpediture * Math.pow(monthlyRate, 8), totalExpediture * Math.pow(monthlyRate, 9), totalExpediture * Math.pow(monthlyRate, 10), totalExpediture * Math.pow(monthlyRate, 11), totalExpediture * Math.pow(monthlyRate, 12)],
                                     borderColor: "red",
                                     fill: false
                                 }, {
-                                    data: [totalExpediture, totalExpediture * 1.06, totalExpediture * Math.pow(1.06, 2), totalExpediture * Math.pow(1.06, 3), totalExpediture * Math.pow(1.06, 4), totalExpediture * Math.pow(1.06, 5), totalExpediture * Math.pow(1.06, 6), totalExpediture * Math.pow(1.06, 7), totalExpediture * Math.pow(1.06, 8), totalExpediture * Math.pow(1.06, 9), totalExpediture * Math.pow(1.06, 10), totalExpediture * Math.pow(1.06, 11), totalExpediture * Math.pow(1.06, 12)],
+                                    data: [totalExpediture, totalExpediture * fedRate, totalExpediture * Math.pow(fedRate, 2), totalExpediture * Math.pow(fedRate, 3), totalExpediture * Math.pow(fedRate, 4), totalExpediture * Math.pow(fedRate, 5), totalExpediture * Math.pow(fedRate, 6), totalExpediture * Math.pow(fedRate, 7), totalExpediture * Math.pow(fedRate, 8), totalExpediture * Math.pow(fedRate, 9), totalExpediture * Math.pow(fedRate, 10), totalExpediture * Math.pow(fedRate, 11), totalExpediture * Math.pow(fedRate, 12)],
                                     borderColor: "green",
                                     fill: false
                                 }, {
-                                    data: [totalExpediture, totalExpediture * 1.10, totalExpediture * Math.pow(1.10, 2), totalExpediture * Math.pow(1.10, 3), totalExpediture * Math.pow(1.10, 4), totalExpediture * Math.pow(1.10, 5), totalExpediture * Math.pow(1.10, 6), totalExpediture * Math.pow(1.10, 7), totalExpediture * Math.pow(1.10, 8), totalExpediture * Math.pow(1.10, 9), totalExpediture * Math.pow(1.10, 10), totalExpediture * Math.pow(1.10, 11), totalExpediture * Math.pow(1.10, 12)],
+                                    data: [totalExpediture, totalExpediture * yearlyInflationRate, totalExpediture * Math.pow(yearlyInflationRate, 2), totalExpediture * Math.pow(yearlyInflationRate, 3), totalExpediture * Math.pow(yearlyInflationRate, 4), totalExpediture * Math.pow(yearlyInflationRate, 5), totalExpediture * Math.pow(yearlyInflationRate, 6), totalExpediture * Math.pow(yearlyInflationRate, 7), totalExpediture * Math.pow(yearlyInflationRate, 8), totalExpediture * Math.pow(yearlyInflationRate, 9), totalExpediture * Math.pow(yearlyInflationRate, 10), totalExpediture * Math.pow(yearlyInflationRate, 11), totalExpediture * Math.pow(yearlyInflationRate, 12)],
                                     borderColor: "blue",
                                     fill: false
                                 }]
@@ -128,6 +148,8 @@
             <p>© 2022 - Hardly Working Ignition Hacks</p>
         </footer>
     </div>
+
+    <script type="text/javascript" src="script.js"></script>
 
 </body>
 
