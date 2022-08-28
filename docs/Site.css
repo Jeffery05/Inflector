@@ -25,20 +25,9 @@ textarea {
 
 p {font-size: 20px; }
 
-.jumbotron-welcome{
-    background: url('images/DECA\ Stage.jpg') no-repeat fixed;
-}
-
-.jumbotron-DECAMackenzie{
-    background: url('images/DECA\ Logo.png') no-repeat fixed;
-}
-
-.jumbotron-WhyJoin{
-    background: url('images/Why\ Join.jpg') no-repeat fixed;
-}
-
-.jumbotron-HowToApply{
-    background: url('images/HowToApply.jpg') no-repeat fixed;
+.finalFigures{
+    font-size: 120px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -54,11 +43,6 @@ p {font-size: 20px; }
 .carousel-caption {
     bottom: 1rem;
     z-index: 10;
-}
-
-.welcome-carousel-image1{
-    box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.3);
-    background-image: url('images/2019-2020\ Marketing\ Photo.jpg')
 }
 
 .btn-primary{
